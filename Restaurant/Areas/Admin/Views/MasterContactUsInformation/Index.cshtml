@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Restaurant.Areas.Admin.ViewModels.MasterContactUsInformationModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="pagetitle">
+    <h1>Master Contact Us Information table</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home</a></li>
+            <li class="breadcrumb-item active">Master Contact Us Information</li>
+        </ol>
+    </nav>
+</div>
+<div class="text-right text-end">
+    <p>
+        <a asp-action="Create" class="btn btn-primary"> Create </a>
+    </p>
+</div>
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>
+                                   Name
+                                </th>
+                                <th>
+                                    Img
+                                </th>
+                                <th>
+                                    Redirect
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th class="text-center">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="align-middle">
+                                        @Html.DisplayFor(modelItem => item.MasterContactUsInformationIdesc)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MasterContactUsInformationImageUrl)
+                                    </td>
+                                    <td class="align-middle">
+                                        @Html.DisplayFor(modelItem => item.MasterContactUsInformationRedirect)
+                                    </td>
+                                    <td class="align-middle">
+                                        @Html.DisplayFor(modelItem => item.MasterContactUsInformationTitle)
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a asp-action="Edit" asp-route-id="@item.MasterContactUsInformationId">
+                                            <i class="bx bxs-edit text-secondary h5"></i>
+                                        </a>
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#deleteModal" class="csBtnDelete"
+                                           data-path="@Url.ActionLink("IsDelete", "MasterContactUsInformation", new { idDelete = item.MasterContactUsInformationId })">
+                                            <i class="bx bxs-trash text-danger h5"></i>
+                                        </a>
+                                        @if (item.IsActive == true)
+                                        {
+                                            <a asp-action="Active" asp-route-id="@item.MasterContactUsInformationId">
+                                                <i class="ri-eye-fill text-success h5"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Active" asp-route-id="@item.MasterContactUsInformationId">
+                                                <i class="ri-eye-close-fill text-danger h5"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure for delete this item ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnCansel" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnConfirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous">
+</script>
+
+
+<script>
+
+
+
+    $(function () {
+
+        var dataPath = "";
+        $(".csBtnDelete").click(function () {
+            dataPath = $(this).data("path");
+
+        });
+        $("#btnConfirmDelete").click(function () {
+            window.location = dataPath;
+            dataPath = "";
+
+        });
+
+        $("#btnCansel").click(function () {
+            dataPath = "";
+        });
+
+    })
+</script>
+

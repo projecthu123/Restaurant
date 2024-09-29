@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Restaurant.Areas.Admin.ViewModels.SystemSettingModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="pagetitle">
+    <h1>System Setting</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home</a></li>
+            <li class="breadcrumb-item active"><a asp-action="Index" asp-controller="SystemSetting">System Setting</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+    </nav>
+</div>
+
+<p class="text-right text-end">
+    <a asp-action="Create" class="btn btn-primary">Create</a>
+</p>
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    logo1
+                                </th>
+                                <th>
+                                    logo2
+                                </th>
+                                <th>
+                                    Rights
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Breef
+                                </th>
+                                <th>
+                                    description
+                                </th>
+                                <th>
+                                    NoteUrl
+                                </th>
+                                <th>
+                                    NoteImage
+                                </th>
+                                <th>
+                                    Map
+                                </th>
+                                <th>
+                                    Icon
+                                </th>
+
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/images/@item.SystemSettingLogoImageUrl" style="max-width:50px" />
+                                    </td>
+                                    <td>
+                                        <img src="~/images/@item.SystemSettingLogoImageUrl2" style="max-width:50px" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SystemSettingCopyright)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteTitle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteBreef)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteDesc)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SystemSettingWelcomeNoteUrl)
+                                    </td>
+                                    <td>
+                                        <img src="~/images/@item.SystemSettingWelcomeNoteImageUrl" style="max-width:50px" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SystemSettingMapLocation)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Icon)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.SystemSettingId"><i class="bx bxs-edit text-secondary h5"></i></a> |
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#deleteModal" class="csBtnDelete"
+                                           data-path="@Url.ActionLink("IsDelete", "SystemSetting", new { idDelete = item.SystemSettingId })">
+                                            <i class="bx bxs-trash text-danger h5"></i>
+                                        </a>
+                                        @if (item.IsActive == true)
+                                        {
+                                            <a asp-action="Active" asp-route-id="@item.SystemSettingId"> <i class="ri-eye-fill text-success h5"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Active" asp-route-id="@item.SystemSettingId"> <i class="ri-eye-close-fill text-danger h5"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure for delete this item ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnCansel" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnConfirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous">
+</script>
+
+
+<script>
+
+
+
+    $(function () {
+
+        var dataPath = "";
+        $(".csBtnDelete").click(function () {
+            dataPath = $(this).data("path")
+
+        });
+        $("#btnConfirmDelete").click(function () {
+            window.location = dataPath;
+            dataPath = "";
+
+        });
+
+        $("#btnCansel").click(function () {
+            dataPath = "";
+        });
+
+    })
+</script>

@@ -1,0 +1,57 @@
+﻿@model Restaurant.ViewModels.HomeModel
+@{
+    ViewData["Title"] = "ProductDetails";
+}
+
+<div class="breadcrumb-area bg-img ptb-80" style="background-image:url(/assets/img/banner/breath.jpg);">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h3>blog sidebar</h3>
+            <ul>
+                <li>
+                    <a href="/Home">Home</a>
+                </li>
+                <li class="active">blog details </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="blog-area pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-9 ">
+                <div class="blog-details-wrapper">
+                    
+                    <div class="single-blog-wrapper">
+                        <div class="blog-img mb-30" >
+                            <a href="#">
+                                <img  src="~/images/@Model.MasterItemMenu.MasterItemMenuImageUrl" alt="">
+                            </a>
+                            <span class="blogpost-time-date">
+                                <span class="date">01</span>
+                                <span class="month">Feb</span>
+                            </span>
+                        </div>
+                        <h2>@Model.MasterItemMenu.MasterItemMenuTitle</h2>
+                        @Html.Raw(@Model.MasterItemMenu.MasterItemMenuBreef)
+                        @Html.Raw(@Model.MasterItemMenu.MasterItemMenuInfo)
+                        <blockquote class="importent-title">
+                            @Html.Raw(@Model.MasterItemMenu.MasterItemMenuDesc)
+                        </blockquote>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
+
